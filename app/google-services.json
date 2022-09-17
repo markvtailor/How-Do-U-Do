@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "557112928272",
+    "project_id": "how-d-u-d",
+    "storage_bucket": "how-d-u-d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557112928272:android:606dd63223506b14838295",
+        "android_client_info": {
+          "package_name": "com.markvtls.howdud"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "557112928272-5lg9af3nutle7uk3rg7mde2cgkqi8o7o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.markvtls.howdud",
+            "certificate_hash": "ae75d1383927a33c954e5b80ce8133de1de8b051"
+          }
+        },
+        {
+          "client_id": "557112928272-dl0iq60434kisct9jpev6kkbte9lte2s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZfOSNO6xphrUD9IE0mDyQcmXBy_TcCDY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "557112928272-dl0iq60434kisct9jpev6kkbte9lte2s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
