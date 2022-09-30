@@ -17,14 +17,10 @@ import androidx.loader.content.Loader
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
-import com.markvtls.howdud.R
-import com.markvtls.howdud.data.dto.Friend
 import com.markvtls.howdud.databinding.FragmentChatFromContactsBinding
 import com.markvtls.howdud.presentation.ChatsListViewModel
-import com.markvtls.howdud.presentation.adapters.ChatsListAdapter
 import com.markvtls.howdud.presentation.adapters.ContactsListAdapter
 import com.markvtls.howdud.utils.parseNumber
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 /**
@@ -108,7 +104,7 @@ class ChatFromContactsFragment : Fragment() {
         }
         recyclerView.adapter = adapter
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.friend.collect {
+            viewModel.friends.collect {
                 adapter.submitList(it)
             }
 

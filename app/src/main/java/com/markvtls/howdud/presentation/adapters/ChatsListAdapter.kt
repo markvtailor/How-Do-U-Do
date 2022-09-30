@@ -24,7 +24,7 @@ class ChatsListAdapter(
                 chatTitle.text = chat.title
                 lastMessage.text = chat.lastMessage
                 date.text = chat.date
-                newMessages.text = chat.newMessages.toString()
+                newMessages.text = if (chat.newMessages == 0) "" else chat.newMessages.toString()
                 //chatIcon
             }
         }

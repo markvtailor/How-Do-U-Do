@@ -18,6 +18,7 @@ import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.markvtls.howdud.databinding.FragmentChatsListBinding
@@ -67,7 +68,10 @@ class ChatsListFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.getUserChats(currentUser)
+                viewModel.getChatsPreview(currentUser)
                 viewModel.chats.collect {
+                    println(it)
                     loadChats(it)
                 }
             }
@@ -79,6 +83,8 @@ class ChatsListFragment : Fragment() {
     private fun loadChats(chatsList: List<Chat>) {
         val chats = binding.chats
         chats.layoutManager = LinearLayoutManager(this.context)
+        val divider = DividerItemDecoration(chats.context, LinearLayoutManager.VERTICAL)
+        chats.addItemDecoration(divider)
         val adapter = ChatsListAdapter() {
             toChat(it)
         }

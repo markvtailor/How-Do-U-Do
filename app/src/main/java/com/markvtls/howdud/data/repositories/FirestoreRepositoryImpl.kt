@@ -1,6 +1,7 @@
 package com.markvtls.howdud.data.repositories
 
 import com.markvtls.howdud.data.dto.Friend
+import com.markvtls.howdud.data.dto.User
 import com.markvtls.howdud.data.dto.UserChats
 import com.markvtls.howdud.data.source.local.FirestoreDatabase
 import com.markvtls.howdud.domain.model.Message
@@ -12,11 +13,15 @@ class FirestoreRepositoryImpl @Inject constructor(
     private val firestoreDatabase: FirestoreDatabase
 ): FirestoreRepository {
 
+    override suspend fun getUsername(userId: String): Flow<User?> {
+        return firestoreDatabase.getUsername(userId)
+    }
+
     override suspend fun getUserChats(userId: String): Flow<UserChats?> {
         return firestoreDatabase.getChatsList(userId)
     }
 
-    override suspend fun getMessages(chatId: String): Flow<List<Message?>> {
+    override suspend fun getMessages(chatId: String): Flow<List<Message>> {
         return firestoreDatabase.getMessages(chatId)
     }
 

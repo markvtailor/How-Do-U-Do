@@ -24,12 +24,13 @@ class ChatsListViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _friends = MutableStateFlow<List<Friend>>(emptyList())
-    val friend get() = _friends
-    private var _chats = MutableStateFlow<List<Chat>>(emptyList())
+    val friends get() = _friends
+    private val chatsBuffer = mutableListOf<Chat>()
+    private var _chats = MutableStateFlow<List<Chat>>(mutableListOf())
     val chats get() = _chats
-    init {
+   /* init {
         getUserChats("admin")
-    }
+    }*/
 
 
      fun getUserChats(userId: String) {
@@ -42,16 +43,31 @@ class ChatsListViewModel @Inject constructor(
         }
     }
 
+    private fun getPreview(chatId: String, userId: String) {
+        viewModelScope.launch {
+            getChatsPreviewUseCase(chatId, userId).collect { chat ->
+                _friends.collect {
+                    println(it)
+                    chat.title = friends.value.find { it.id == chat.title }?.name ?: chat.title
+                    println(friends.value.find { it.id == chat.title }?.name ?: chat.title)
+                    println(chat.id)
+
+                    chatsBuffer.add(chat)
+                    println(chatsBuffer.distinctBy { it.id })
+                    //_chats.emit(chatsList)
+                    _chats.emit(chatsBuffer.distinctBy { it.id })
+                }
+            }
+        }
+
+    }
     fun getChatsPreview(userId: String) {
-        val chatsList = mutableListOf<Chat>()
         viewModelScope.launch {
             getChatsListUseCase(userId).collect {
-                it.forEach { chatId ->
-                    getChatsPreviewUseCase(chatId, userId).collect { chat ->
-                        chatsList.add(chat)
-                        chats.emit(chatsList)
-                    }
+                it.forEach {
+                    getPreview(it, userId)
                 }
+                chatsBuffer.clear()
             }
 
         }

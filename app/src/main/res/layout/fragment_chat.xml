@@ -11,10 +11,12 @@
         android:id="@+id/messages"
         android:layout_width="match_parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/send_layout"
         android:layout_height="0dp">
     </androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
+        android:id="@+id/send_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"

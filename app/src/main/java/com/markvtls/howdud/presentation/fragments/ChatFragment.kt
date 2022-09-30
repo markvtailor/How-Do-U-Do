@@ -39,6 +39,7 @@ class ChatFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         currentUser = FirebaseAuth.getInstance().currentUser?.phoneNumber?.replaceFirst("+","").toString()
+        viewModel.loadMessages(navArgs.chatId)
         _binding = FragmentChatBinding.inflate(inflater, container, false)
         return binding.root
     }
